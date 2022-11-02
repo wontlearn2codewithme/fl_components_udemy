@@ -37,15 +37,36 @@ class Approutes {
       name: 'Alert Screen',
       screen: const AlertScreen(),
     ),
+    MenuOption(
+      route: 'avatar',
+      icon: Icons.person,
+      name: 'Circle avatar',
+      screen: const AvatarScreen(),
+    ),
+    MenuOption(
+      route: 'animated',
+      icon: Icons.animation,
+      name: 'Animated container',
+      screen: const AnimatedScreen(),
+    ),
   ];
 
-  static Map<String, Widget Function(BuildContext)> routes = {
-    'home': (context) => const HomeScreen(),
-    'listview1': (context) => const ListView1Screen(),
-    'listview2': (context) => const ListView2Screen(),
-    'alert': (context) => const AlertScreen(),
-    'card': (context) => const CardScreen(),
-  };
+  static Map<String, Widget Function(BuildContext)> getAppRoutes() {
+    Map<String, Widget Function(BuildContext)> approutes = {};
+
+    for (final item in menuOptions) {
+      approutes.addAll({item.route: (BuildContext context) => item.screen});
+    }
+    return approutes;
+  }
+
+  // static Map<String, Widget Function(BuildContext)> routes = {
+  //   'home': (context) => const HomeScreen(),
+  //   'listview1': (context) => const ListView1Screen(),
+  //   'listview2': (context) => const ListView2Screen(),
+  //   'alert': (context) => const AlertScreen(),
+  //   'card': (context) => const CardScreen(),
+  // };
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(
